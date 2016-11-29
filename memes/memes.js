@@ -16,6 +16,9 @@ console.log(CONTACTS);
 var MAX_COUNT = CONTACTS.length;
 var count = 0;
 count = JSON.parse(localStorage.getItem('count'));
+if(count < 0 || count === null || count == "null")
+    count = 0;
+console.log(count === null);
 console.log(count);
 
 var Meme = React.createClass({
@@ -131,6 +134,8 @@ var MemesApp = React.createClass({
         this.setState({ memes: newMemes });
         if(count != 0)
             count -= 1;
+        if(count < 0)
+            count = 0;
     },
 
     handleMemeAdd: function(newMeme) {
@@ -153,6 +158,8 @@ var MemesApp = React.createClass({
     _updateLocalStorage: function() {
         var memes = JSON.stringify(this.state.memes);
         localStorage.setItem('memes', memes);
+        if(count < 0 || count === null || count == "null")
+            count = 0;
         localStorage.setItem('count', count);
         console.log(localStorage);
 
